@@ -19,7 +19,7 @@
     android:layout_width="@dimen/mdtp_picker_dimen"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/mdtp_background_color"
+
     android:focusable="true" >
     <LinearLayout
         android:id="@+id/time_display_background"
