@@ -35,6 +35,10 @@ import android.view.View;
  */
 public class Utils {
 
+    public enum DateTimeTheme {
+        LIGHT, DARK, BLACK
+    }
+
     //public static final int MONDAY_BEFORE_JULIAN_EPOCH = Time.EPOCH_JULIAN_DAY - 3;
     public static final int PULSE_ANIMATOR_DURATION = 544;
 
@@ -164,8 +168,8 @@ public class Utils {
      * @param current Default value to return if cannot resolve the attribute
      * @return true if dark mode, false if light.
      */
-    public static boolean isDarkTheme(Context context, boolean current) {
-        return resolveBoolean(context, R.attr.mdtp_theme_dark, current);
+    public static DateTimeTheme getDialogTheme(Context context, DateTimeTheme current) {
+        return DateTimeTheme.values()[resolveInteger(context, R.attr.mdtp_theme, current.ordinal())];
     }
 
     /**
@@ -179,6 +183,15 @@ public class Utils {
         TypedArray a = context.getTheme().obtainStyledAttributes(new int[]{attr});
         try {
             return a.getBoolean(0, fallback);
+        } finally {
+            a.recycle();
+        }
+    }
+
+    private static int resolveInteger(Context context, @AttrRes int attr, int fallback) {
+        TypedArray a = context.getTheme().obtainStyledAttributes(new int[]{attr});
+        try {
+            return a.getInteger(0, fallback);
         } finally {
             a.recycle();
         }

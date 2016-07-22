@@ -28,7 +28,6 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.annotation.StyleRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -69,8 +68,8 @@ public class TimePickerDialog extends DialogFragment implements
     private static final String KEY_CURRENT_ITEM_SHOWING = "current_item_showing";
     private static final String KEY_IN_KB_MODE = "in_kb_mode";
     private static final String KEY_TYPED_TIMES = "typed_times";
-    private static final String KEY_THEME_DARK = "theme_dark";
-    private static final String KEY_THEME_DARK_CHANGED = "theme_dark_changed";
+    private static final String KEY_THEME = "theme";
+    private static final String KEY_THEME_CHANGED = "theme_changed";
     private static final String KEY_ACCENT = "accent";
     private static final String KEY_VIBRATE = "vibrate";
     private static final String KEY_DISMISS = "dismiss";
@@ -120,8 +119,8 @@ public class TimePickerDialog extends DialogFragment implements
     private Timepoint mInitialTime;
     private boolean mIs24HourMode;
     private String mTitle;
-    private boolean mThemeDark;
-    private boolean mThemeDarkChanged;
+    private Utils.DateTimeTheme mTheme;
+    private boolean mThemeChanged;
     private boolean mVibrate;
     private int mAccentColor = -1;
     private boolean mDismissOnPause;
@@ -192,8 +191,8 @@ public class TimePickerDialog extends DialogFragment implements
         mIs24HourMode = is24HourMode;
         mInKbMode = false;
         mTitle = "";
-        mThemeDark = false;
-        mThemeDarkChanged = false;
+        mTheme = Utils.DateTimeTheme.LIGHT;
+        mThemeChanged = false;
         mAccentColor = -1;
         mVibrate = true;
         mDismissOnPause = false;
@@ -217,9 +216,9 @@ public class TimePickerDialog extends DialogFragment implements
     /**
      * Set a dark or light theme. NOTE: this will only take effect for the next onCreateView.
      */
-    public void setThemeDark(boolean dark) {
-        mThemeDark = dark;
-        mThemeDarkChanged = true;
+    public void setTheme(Utils.DateTimeTheme theme) {
+        mTheme = theme;
+        mThemeChanged = true;
     }
 
     /**
@@ -242,9 +241,10 @@ public class TimePickerDialog extends DialogFragment implements
         mAccentColor = Color.argb(255, Color.red(color), Color.green(color), Color.blue(color));;
     }
 
+    @NonNull
     @Override
-    public boolean isThemeDark() {
-        return mThemeDark;
+    public Utils.DateTimeTheme getDialogTheme() {
+        return mTheme;
     }
 
     @Override
@@ -442,8 +442,8 @@ public class TimePickerDialog extends DialogFragment implements
             mIs24HourMode = savedInstanceState.getBoolean(KEY_IS_24_HOUR_VIEW);
             mInKbMode = savedInstanceState.getBoolean(KEY_IN_KB_MODE);
             mTitle = savedInstanceState.getString(KEY_TITLE);
-            mThemeDark = savedInstanceState.getBoolean(KEY_THEME_DARK);
-            mThemeDarkChanged = savedInstanceState.getBoolean(KEY_THEME_DARK_CHANGED);
+            mTheme = Utils.DateTimeTheme.values()[savedInstanceState.getInt(KEY_THEME)];
+            mThemeChanged = savedInstanceState.getBoolean(KEY_THEME_CHANGED);
             mAccentColor = savedInstanceState.getInt(KEY_ACCENT);
             mVibrate = savedInstanceState.getBoolean(KEY_VIBRATE);
             mDismissOnPause = savedInstanceState.getBoolean(KEY_DISMISS);
@@ -473,8 +473,8 @@ public class TimePickerDialog extends DialogFragment implements
         }
 
         // if theme mode has not been set by java code, check if it is specified in Style.xml
-        if (!mThemeDarkChanged) {
-            mThemeDark = Utils.isDarkTheme(getActivity(), mThemeDark);
+        if (!mThemeChanged) {
+            mTheme = Utils.getDialogTheme(getActivity(), mTheme);
         }
 
         Resources res = getResources();
@@ -700,11 +700,31 @@ public class TimePickerDialog extends DialogFragment implements
 
         int circleBackground = ContextCompat.getColor(context, R.color.mdtp_circle_background);
         int backgroundColor = ContextCompat.getColor(context, R.color.mdtp_background_color);
-        int darkBackgroundColor = ContextCompat.getColor(context, R.color.mdtp_light_gray);
-        int lightGray = ContextCompat.getColor(context, R.color.mdtp_light_gray);
 
-        mTimePicker.setBackgroundColor(mThemeDark? lightGray : circleBackground);
-        //view.findViewById(R.id.time_picker_dialog).setBackgroundColor(mThemeDark ? darkBackgroundColor : backgroundColor);
+        int lightGray = ContextCompat.getColor(context, R.color.mdtp_light_gray);
+        int darkBackgroundColor = ContextCompat.getColor(context, R.color.mdtp_light_gray);
+
+        if(getDialogTheme() == Utils.DateTimeTheme.LIGHT) {
+            mTimePicker.setBackgroundColor(circleBackground);
+            view.findViewById(R.id.time_picker_dialog).setBackgroundColor(backgroundColor);
+        } else if(getDialogTheme() == Utils.DateTimeTheme.DARK) {
+            mTimePicker.setBackgroundColor(lightGray);
+            view.findViewById(R.id.time_picker_dialog).setBackgroundColor(darkBackgroundColor);
+
+        } else {
+            mTimePicker.setBackgroundColor(Color.BLACK);
+            view.findViewById(R.id.time_picker_dialog).setBackgroundColor(Color.BLACK);
+        }
+
+
+
+        if(getDialogTheme() == Utils.DateTimeTheme.LIGHT) {
+
+        } else if(getDialogTheme() == Utils.DateTimeTheme.DARK) {
+
+        } else {
+
+        }
         return view;
     }
 
@@ -770,8 +790,8 @@ public class TimePickerDialog extends DialogFragment implements
                 outState.putIntegerArrayList(KEY_TYPED_TIMES, mTypedTimes);
             }
             outState.putString(KEY_TITLE, mTitle);
-            outState.putBoolean(KEY_THEME_DARK, mThemeDark);
-            outState.putBoolean(KEY_THEME_DARK_CHANGED, mThemeDarkChanged);
+            outState.putInt(KEY_THEME, mTheme.ordinal());
+            outState.putBoolean(KEY_THEME_CHANGED, mThemeChanged);
             outState.putInt(KEY_ACCENT, mAccentColor);
             outState.putBoolean(KEY_VIBRATE, mVibrate);
             outState.putBoolean(KEY_DISMISS, mDismissOnPause);

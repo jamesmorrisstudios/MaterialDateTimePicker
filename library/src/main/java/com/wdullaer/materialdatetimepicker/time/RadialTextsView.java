@@ -32,6 +32,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.wdullaer.materialdatetimepicker.R;
+import com.wdullaer.materialdatetimepicker.Utils;
 
 /**
  * A view to show a series of numbers in a circular pattern.
@@ -95,7 +96,15 @@ public class RadialTextsView extends View {
         Resources res = context.getResources();
 
         // Set up the paint.
-        int textColorRes = controller.isThemeDark() ? R.color.mdtp_white : R.color.mdtp_numbers_text_color;
+        int textColorRes;
+        if(controller.getDialogTheme() == Utils.DateTimeTheme.LIGHT) {
+            textColorRes = R.color.mdtp_numbers_text_color;
+        } else if(controller.getDialogTheme() == Utils.DateTimeTheme.DARK) {
+            textColorRes = R.color.mdtp_white;
+        } else {
+            textColorRes = R.color.mdtp_white;
+        }
+
         mPaint.setColor(ContextCompat.getColor(context, textColorRes));
         String typefaceFamily = res.getString(R.string.mdtp_radial_numbers_typeface);
         mTypefaceLight = Typeface.create(typefaceFamily, Typeface.NORMAL);
@@ -111,8 +120,14 @@ public class RadialTextsView extends View {
         mSelectedPaint.setTextAlign(Align.CENTER);
 
         // Set up the inactive paint
-        int inactiveColorRes = controller.isThemeDark() ? R.color.mdtp_date_picker_text_disabled_dark_theme
-                : R.color.mdtp_date_picker_text_disabled;
+        int inactiveColorRes;
+        if(controller.getDialogTheme() == Utils.DateTimeTheme.LIGHT) {
+            inactiveColorRes = R.color.mdtp_date_picker_text_disabled;
+        } else if(controller.getDialogTheme() == Utils.DateTimeTheme.DARK) {
+            inactiveColorRes = R.color.mdtp_date_picker_text_disabled_dark_theme;
+        } else {
+            inactiveColorRes = R.color.mdtp_date_picker_text_disabled_dark_theme;
+        }
         mInactivePaint.setColor(ContextCompat.getColor(context, inactiveColorRes));
         mInactivePaint.setAntiAlias(true);
         mInactivePaint.setTextAlign(Align.CENTER);

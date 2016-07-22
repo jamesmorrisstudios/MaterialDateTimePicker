@@ -104,8 +104,13 @@ public class RadialSelectorView extends View {
         mPaint.setColor(accentColor);
         mPaint.setAntiAlias(true);
 
-        mSelectionAlpha = controller.isThemeDark() ? SELECTED_ALPHA_THEME_DARK : SELECTED_ALPHA;
-
+        if(controller.getDialogTheme() == Utils.DateTimeTheme.LIGHT) {
+            mSelectionAlpha = SELECTED_ALPHA;
+        } else if(controller.getDialogTheme() == Utils.DateTimeTheme.DARK) {
+            mSelectionAlpha = SELECTED_ALPHA_THEME_DARK;
+        } else {
+            mSelectionAlpha = SELECTED_ALPHA_THEME_DARK;
+        }
         // Calculate values for the circle radius size.
         mIs24HourMode = controller.is24HourMode();
         if (mIs24HourMode) {

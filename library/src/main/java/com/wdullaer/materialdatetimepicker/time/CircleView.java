@@ -25,6 +25,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.wdullaer.materialdatetimepicker.R;
+import com.wdullaer.materialdatetimepicker.Utils;
 
 /**
  * Draws a simple white circle on which the numbers will be drawn.
@@ -59,7 +60,16 @@ public class CircleView extends View {
 
         Resources res = context.getResources();
 
-        int colorRes = controller.isThemeDark() ? R.color.mdtp_circle_background_dark_theme : R.color.mdtp_circle_color;
+        int colorRes;
+
+        if(controller.getDialogTheme() == Utils.DateTimeTheme.LIGHT) {
+            colorRes = R.color.mdtp_circle_color;
+        } else if(controller.getDialogTheme() == Utils.DateTimeTheme.DARK) {
+            colorRes = R.color.mdtp_circle_background_dark_theme;
+        } else {
+            colorRes = R.color.mdtp_circle_background_black_theme;
+        }
+
         mCircleColor = ContextCompat.getColor(context, colorRes);
         mDotColor = controller.getAccentColor();
         mPaint.setAntiAlias(true);

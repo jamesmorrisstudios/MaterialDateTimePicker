@@ -81,17 +81,24 @@ public class AmPmCirclesView extends View {
 
         Resources res = context.getResources();
 
-        if (controller.isThemeDark()) {
+
+        if(controller.getDialogTheme() == Utils.DateTimeTheme.LIGHT) {
+            mUnselectedColor = ContextCompat.getColor(context, R.color.mdtp_white);
+            mAmPmTextColor = ContextCompat.getColor(context, R.color.mdtp_ampm_text_color);
+            mAmPmDisabledTextColor = ContextCompat.getColor(context, R.color.mdtp_date_picker_text_disabled);
+            mSelectedAlpha = SELECTED_ALPHA;
+        } else if(controller.getDialogTheme() == Utils.DateTimeTheme.DARK) {
             mUnselectedColor = ContextCompat.getColor(context, R.color.mdtp_circle_background_dark_theme);
             mAmPmTextColor = ContextCompat.getColor(context, R.color.mdtp_white);
             mAmPmDisabledTextColor = ContextCompat.getColor(context, R.color.mdtp_date_picker_text_disabled_dark_theme);
             mSelectedAlpha = SELECTED_ALPHA_THEME_DARK;
         } else {
-            mUnselectedColor = ContextCompat.getColor(context, R.color.mdtp_white);
-            mAmPmTextColor = ContextCompat.getColor(context, R.color.mdtp_ampm_text_color);
-            mAmPmDisabledTextColor = ContextCompat.getColor(context, R.color.mdtp_date_picker_text_disabled);
-            mSelectedAlpha = SELECTED_ALPHA;
+            mUnselectedColor = ContextCompat.getColor(context, R.color.mdtp_circle_background_black_theme);
+            mAmPmTextColor = ContextCompat.getColor(context, R.color.mdtp_white);
+            mAmPmDisabledTextColor = ContextCompat.getColor(context, R.color.mdtp_date_picker_text_disabled_dark_theme);
+            mSelectedAlpha = SELECTED_ALPHA_THEME_DARK;
         }
+
 
         mSelectedColor = controller.getAccentColor();
         mTouchedColor = Utils.darkenColor(mSelectedColor);

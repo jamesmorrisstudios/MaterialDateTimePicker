@@ -1,5 +1,9 @@
 package com.wdullaer.materialdatetimepicker.time;
 
+import android.support.annotation.NonNull;
+
+import com.wdullaer.materialdatetimepicker.Utils;
+
 /**
  * A collection of methods which need to be shared with all components of the TimePicker
  *
@@ -9,7 +13,8 @@ public interface TimePickerController {
     /**
      * @return boolean - true if the dark theme should be used
      */
-    boolean isThemeDark();
+    @NonNull
+    Utils.DateTimeTheme getDialogTheme();
 
     /**
      * @return boolean - true if 24 hour mode is used / false if AM/PM is used

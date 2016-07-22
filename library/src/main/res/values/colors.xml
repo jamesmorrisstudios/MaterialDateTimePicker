@@ -53,6 +53,9 @@
     <!-- TimePicker Dark Theme -->
     <color name="mdtp_circle_background_dark_theme">#525252</color>
 
+    <!-- TimePicker Black Theme -->
+    <color name="mdtp_circle_background_black_theme">#000000</color>
+
     <!-- Colors for red theme -->
     <color name="mdtp_red">@color/mdtp_accent_color</color>
     <color name="mdtp_red_focused">@color/mdtp_accent_color_dark</color>

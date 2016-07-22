@@ -15,7 +15,8 @@
 -->
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
-    <attr name="mdtp_theme_dark" format="boolean">false</attr>
+    <!--0==light, 1==dark, 2==black -->
+    <attr name="mdtp_theme" format="integer">0</attr>
 
     <style name="mdtp_time_label">
         <item name="android:textSize">@dimen/mdtp_time_label_size</item>
