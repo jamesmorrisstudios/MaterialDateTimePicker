@@ -510,13 +510,13 @@ public class TimePickerWidget implements
         int darkBackgroundColor = ContextCompat.getColor(context, R.color.mdtp_light_gray);
 
         if(getDialogTheme() == Utils.DateTimeTheme.LIGHT) {
-            mTimePicker.setBackgroundColor(circleBackground);
+            //mTimePicker.setBackgroundColor(circleBackground);
             //view.findViewById(R.id.time_picker_dialog).setBackgroundColor(backgroundColor);
         } else if(getDialogTheme() == Utils.DateTimeTheme.DARK) {
-            mTimePicker.setBackgroundColor(lightGray);
+            //mTimePicker.setBackgroundColor(lightGray);
             //view.findViewById(R.id.time_picker_dialog).setBackgroundColor(darkBackgroundColor);
         } else {
-            mTimePicker.setBackgroundColor(Color.BLACK);
+            //mTimePicker.setBackgroundColor(Color.BLACK);
             //view.findViewById(R.id.time_picker_dialog).setBackgroundColor(Color.BLACK);
         }
         return view;
