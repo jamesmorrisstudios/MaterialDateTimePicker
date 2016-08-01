@@ -33,7 +33,7 @@
         android:layout_height="@dimen/mdtp_time_picker_height"
         android:layout_width="wrap_content"
         android:orientation="vertical" >
-        <include layout="@layout/mdtp_time_title_view" />
+
         <FrameLayout
             android:id="@+id/time_display_background"
             android:layout_width="@dimen/mdtp_left_side_width"

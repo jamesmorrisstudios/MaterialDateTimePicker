@@ -28,8 +28,6 @@
         android:orientation="vertical"
         android:background="@color/mdtp_accent_color" >
 
-        <include layout="@layout/mdtp_time_title_view" />
-
         <include
             layout="@layout/mdtp_time_header_label"
             android:layout_width="match_parent"

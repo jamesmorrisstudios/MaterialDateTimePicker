@@ -58,11 +58,11 @@ public class RadialPickerLayout extends FrameLayout implements OnTouchListener {
     private static final int HOUR_VALUE_TO_DEGREES_STEP_SIZE = VISIBLE_DEGREES_STEP_SIZE;
     private static final int MINUTE_VALUE_TO_DEGREES_STEP_SIZE = 6;
     private static final int SECOND_VALUE_TO_DEGREES_STEP_SIZE = 6;
-    private static final int HOUR_INDEX = TimePickerDialog.HOUR_INDEX;
-    private static final int MINUTE_INDEX = TimePickerDialog.MINUTE_INDEX;
-    private static final int SECOND_INDEX = TimePickerDialog.SECOND_INDEX;
-    private static final int AM = TimePickerDialog.AM;
-    private static final int PM = TimePickerDialog.PM;
+    private static final int HOUR_INDEX = TimePickerWidget.HOUR_INDEX;
+    private static final int MINUTE_INDEX = TimePickerWidget.MINUTE_INDEX;
+    private static final int SECOND_INDEX = TimePickerWidget.SECOND_INDEX;
+    private static final int AM = TimePickerWidget.AM;
+    private static final int PM = TimePickerWidget.PM;
 
     private Timepoint mLastValueSelected;
 
@@ -160,7 +160,7 @@ public class RadialPickerLayout extends FrameLayout implements OnTouchListener {
      * @param initialTime The initial selection of the Timepicker
      * @param is24HourMode Indicates whether we should render in 24hour mode or with AM/PM selectors
      */
-    public void initialize(Context context, TimePickerDialog timePickerDialog,
+    public void initialize(Context context, TimePickerWidget timePickerDialog,
             Timepoint initialTime, boolean is24HourMode) {
         if (mTimeInitialized) {
             Log.e(TAG, "Time has already been initialized.");
