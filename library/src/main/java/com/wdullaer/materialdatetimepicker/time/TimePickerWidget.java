@@ -511,13 +511,13 @@ public class TimePickerWidget implements
 
         if(getDialogTheme() == Utils.DateTimeTheme.LIGHT) {
             mTimePicker.setBackgroundColor(circleBackground);
-            view.findViewById(R.id.time_picker_dialog).setBackgroundColor(backgroundColor);
+            //view.findViewById(R.id.time_picker_dialog).setBackgroundColor(backgroundColor);
         } else if(getDialogTheme() == Utils.DateTimeTheme.DARK) {
             mTimePicker.setBackgroundColor(lightGray);
-            view.findViewById(R.id.time_picker_dialog).setBackgroundColor(darkBackgroundColor);
+            //view.findViewById(R.id.time_picker_dialog).setBackgroundColor(darkBackgroundColor);
         } else {
             mTimePicker.setBackgroundColor(Color.BLACK);
-            view.findViewById(R.id.time_picker_dialog).setBackgroundColor(Color.BLACK);
+            //view.findViewById(R.id.time_picker_dialog).setBackgroundColor(Color.BLACK);
         }
         return view;
     }

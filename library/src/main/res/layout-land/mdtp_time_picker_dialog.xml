@@ -30,7 +30,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:background="@color/mdtp_circle_background" />
-    
+
     <LinearLayout
         android:layout_height="@dimen/mdtp_time_picker_height"
         android:layout_width="wrap_content"
