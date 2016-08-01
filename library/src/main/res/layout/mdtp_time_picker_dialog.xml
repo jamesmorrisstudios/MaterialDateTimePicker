@@ -16,11 +16,12 @@
   -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/time_picker_dialog"
-    android:layout_width="@dimen/mdtp_picker_dimen"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-
     android:focusable="true" >
+
     <LinearLayout
         android:id="@+id/time_display_background"
         android:layout_width="wrap_content"
@@ -44,5 +45,4 @@
             android:focusableInTouchMode="true" />
     </LinearLayout>
 
-    <include layout="@layout/mdtp_done_button" />
 </LinearLayout>

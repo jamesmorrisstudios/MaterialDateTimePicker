@@ -21,6 +21,7 @@
     android:orientation="horizontal"
     android:background="@color/mdtp_background_color"
     android:focusable="true" >
+
     <com.wdullaer.materialdatetimepicker.time.RadialPickerLayout
         android:id="@+id/time_picker"
         android:layout_width="@dimen/mdtp_picker_dimen"
@@ -29,6 +30,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:background="@color/mdtp_circle_background" />
+    
     <LinearLayout
         android:layout_height="@dimen/mdtp_time_picker_height"
         android:layout_width="wrap_content"
@@ -46,6 +48,7 @@
                 android:layout_height="@dimen/mdtp_header_height"
                 android:layout_gravity="center" />
         </FrameLayout>
-        <include layout="@layout/mdtp_done_button" />
+
     </LinearLayout>
+
 </LinearLayout>
